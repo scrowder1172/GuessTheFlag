@@ -10,10 +10,11 @@ import SwiftUI
 struct ExampleGradients: View {
     var body: some View {
         VStack {
-//            LinearGradientExample()
-//            ExampleStopGradients()
-//            RadialGradientExample()
-//            AngularGradientExample()
+            LinearGradientExample()
+            ExampleStopGradients()
+            RadialGradientExample()
+            RadialGradientExample2()
+            AngularGradientExample()
             ColorGradientExample()
         }
     }
@@ -48,6 +49,18 @@ struct RadialGradientExample: View {
             RadialGradient(colors: [.blue, .black], center: .center, startRadius: 20, endRadius: 200)
             Text("RadialGradient of Blue and Black")
                 .background(.green)
+        }
+    }
+}
+
+struct RadialGradientExample2: View {
+    var body: some View {
+        ZStack {
+            RadialGradient(stops: [
+                .init(color: .blue, location: 0.3),
+                .init(color: .red, location: 0.3),
+            ], center: .top, startRadius: 200, endRadius: 700)
+                .ignoresSafeArea()
         }
     }
 }

@@ -27,26 +27,47 @@ struct ContentView: View {
             LinearGradient(colors: [.green, .blue], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             
-            VStack (spacing: 30) {
+            VStack {
+                Spacer()
                 
-                VStack {
-                    Text("Find the flag for...")
+                Text("Guess the Flag")
+                        .font(.largeTitle.weight(.bold))
                         .foregroundStyle(.white)
-                        .font(.subheadline.weight(.heavy))
-                    Text(countries[correctAnswer])
-                        .foregroundStyle(.white)
-                        .font(.largeTitle.weight(.semibold))
-                }
                 
-                ForEach(0..<3) {flagButtonNumber in
-                    Button {
-                        flagTapped(flagButtonNumber)
-                    } label: {
-                        Image(countries[flagButtonNumber])
-                            .clipShape(.capsule)
-                            .shadow(radius: 5)
+                Spacer()
+                
+                VStack (spacing: 15) {
+                    
+                    VStack {
+                        Text("Find the flag for...")
+                            .foregroundStyle(.secondary)
+                            .font(.subheadline.weight(.heavy))
+                        Text(countries[correctAnswer])
+                            .font(.largeTitle.weight(.semibold))
+                    }
+                    
+                    ForEach(0..<3) {flagButtonNumber in
+                        Button {
+                            flagTapped(flagButtonNumber)
+                        } label: {
+                            Image(countries[flagButtonNumber])
+                                .clipShape(.rect(cornerRadius: 20))
+                                .shadow(radius: 5)
+                        }
                     }
                 }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 20)
+                .background(.regularMaterial)
+                .clipShape(.rect(cornerRadius: 20))
+                
+                Spacer()
+                
+                Text("Score: \(questionsCorrect) / \(questionsAsked)")
+                    .foregroundStyle(.white)
+                    .font(.title.bold())
+                
+                Spacer()
             }
         }
         .alert(scoreTitle, isPresented: $showingScore) {
