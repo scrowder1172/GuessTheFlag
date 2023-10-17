@@ -18,6 +18,8 @@ struct ContentView: View {
     @State private var showingScore = false
     @State private var scoreTitle = ""
     
+    @State private var endGame: Bool = false
+    
     @State private var questionsAsked: Int = 0
     @State private var questionsCorrect: Int = 0
     
@@ -50,9 +52,7 @@ struct ContentView: View {
                         Button {
                             flagTapped(flagButtonNumber)
                         } label: {
-                            Image(countries[flagButtonNumber])
-                                .clipShape(.rect(cornerRadius: 20))
-                                .shadow(radius: 5)
+                            FlagImage(image: countries[flagButtonNumber])
                         }
                     }
                 }
@@ -75,11 +75,29 @@ struct ContentView: View {
         } message: {
             Text("Your score is \(questionsCorrect) / \(questionsAsked)")
         }
+        .alert("End of Game", isPresented: $endGame) {
+            Button("Restart") {
+                questionsAsked = 0
+                questionsCorrect = 0
+                askQuestion()
+            }
+        } message: {
+            Text("Good job playing! Your final score is: \(questionsCorrect) / \(questionsAsked)")
+        }
+        
         
     }
     
     func flagTapped(_ number: Int) {
         print("Button #\(number) was pressed. Correct answer is: \(correctAnswer)")
+        
+        questionsAsked += 1
+        
+        guard questionsAsked < 8 else {
+            endGame = true
+            return
+        }
+        
         if number == correctAnswer {
             scoreTitle = "Correct"
             print("You guessed correctly!")
@@ -90,12 +108,21 @@ struct ContentView: View {
         }
         
         showingScore = true
-        questionsAsked += 1
+    
     }
     
     func askQuestion() {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
+    }
+}
+
+struct FlagImage: View {
+    var image: String
+    var body: some View {
+        Image(image)
+            .clipShape(.rect(cornerRadius: 20))
+            .shadow(radius: 5)
     }
 }
 
