@@ -93,11 +93,6 @@ struct ContentView: View {
         
         questionsAsked += 1
         
-        guard questionsAsked < 8 else {
-            endGame = true
-            return
-        }
-        
         if number == correctAnswer {
             scoreTitle = "Correct"
             print("You guessed correctly!")
@@ -107,8 +102,11 @@ struct ContentView: View {
             print("You chose poorly!")
         }
         
-        showingScore = true
-    
+        if questionsAsked < 8 {
+            showingScore = true
+        } else {
+            endGame = true
+        }
     }
     
     func askQuestion() {
