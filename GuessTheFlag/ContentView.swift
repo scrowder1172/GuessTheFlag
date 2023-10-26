@@ -23,9 +23,7 @@ struct ContentView: View {
     @State private var questionsAsked: Int = 0
     @State private var questionsCorrect: Int = 0
     
-    @State private var rotationAmount: Double = 0.0
-    
-    @State private var rotationAmounts: [Double] = [0.0, 0.0, 0.0]
+    @State private var selectedFlag: Int = -1
     
     var body: some View {
         
@@ -59,8 +57,10 @@ struct ContentView: View {
                             }
                         } label: {
                             FlagImage(image: countries[flagButtonNumber])
-                                .rotation3DEffect(.degrees(rotationAmounts[flagButtonNumber]), axis: (x: 0, y: 1, z: 0))
                         }
+                        .rotation3DEffect(.degrees(selectedFlag == flagButtonNumber ? 360 : 0), axis: (x: 0, y: 1, z: 0))
+                        .opacity(selectedFlag == -1 || selectedFlag == flagButtonNumber ? 1 : 0.25)
+                        .scaleEffect(selectedFlag == -1 || selectedFlag == flagButtonNumber ? 1 : 0.25)
                         
                     }
                 }
@@ -100,7 +100,7 @@ struct ContentView: View {
         print("\n***\nButton #\(number) was pressed. Correct answer is: \(correctAnswer)")
         
         questionsAsked += 1
-        rotationAmounts[number] += 360.0
+        selectedFlag = number
         
         if number == correctAnswer {
             scoreTitle = "Correct"
@@ -121,6 +121,7 @@ struct ContentView: View {
     func askQuestion() {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
+        selectedFlag = -1
     }
 }
 
