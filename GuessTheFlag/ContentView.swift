@@ -23,6 +23,10 @@ struct ContentView: View {
     @State private var questionsAsked: Int = 0
     @State private var questionsCorrect: Int = 0
     
+    @State private var rotationAmount: Double = 0.0
+    
+    @State private var rotationAmounts: [Double] = [0.0, 0.0, 0.0]
+    
     var body: some View {
         
         ZStack {
@@ -48,12 +52,16 @@ struct ContentView: View {
                             .font(.largeTitle.weight(.semibold))
                     }
                     
-                    ForEach(0..<3) {flagButtonNumber in
+                    ForEach(0..<3) { flagButtonNumber in
                         Button {
-                            flagTapped(flagButtonNumber)
+                            withAnimation {
+                                flagTapped(flagButtonNumber)
+                            }
                         } label: {
                             FlagImage(image: countries[flagButtonNumber])
+                                .rotation3DEffect(.degrees(rotationAmounts[flagButtonNumber]), axis: (x: 0, y: 1, z: 0))
                         }
+                        
                     }
                 }
                 .frame(maxWidth: .infinity)
@@ -89,9 +97,10 @@ struct ContentView: View {
     }
     
     func flagTapped(_ number: Int) {
-        print("Button #\(number) was pressed. Correct answer is: \(correctAnswer)")
+        print("\n***\nButton #\(number) was pressed. Correct answer is: \(correctAnswer)")
         
         questionsAsked += 1
+        rotationAmounts[number] += 360.0
         
         if number == correctAnswer {
             scoreTitle = "Correct"
