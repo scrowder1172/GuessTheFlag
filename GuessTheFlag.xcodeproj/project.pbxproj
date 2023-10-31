@@ -42,6 +42,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		52537A712AF141F80093D751 /* TutorialFiles */ = {
+			isa = PBXGroup;
+			children = (
+				5295DDF52ADDA84B0043B5AE /* ExampleStacks.swift */,
+				5295DDF72ADDC8BF0043B5AE /* ExampleColor.swift */,
+				5295DDF92ADDCF5A0043B5AE /* ExampleGradients.swift */,
+				5295DDFB2ADDE2DF0043B5AE /* ExampleButtonsAndImages.swift */,
+				5295DDFD2ADDEB2D0043B5AE /* ExampleAlerts.swift */,
+			);
+			path = TutorialFiles;
+			sourceTree = "<group>";
+		};
 		5295DDDB2ADDA1C50043B5AE = {
 			isa = PBXGroup;
 			children = (
@@ -64,12 +76,8 @@
 				5295DDE72ADDA1C50043B5AE /* GuessTheFlagApp.swift */,
 				5295DDE92ADDA1C50043B5AE /* ContentView.swift */,
 				5295DDEB2ADDA1C50043B5AE /* Assets.xcassets */,
+				52537A712AF141F80093D751 /* TutorialFiles */,
 				5295DDED2ADDA1C50043B5AE /* Preview Content */,
-				5295DDF52ADDA84B0043B5AE /* ExampleStacks.swift */,
-				5295DDF72ADDC8BF0043B5AE /* ExampleColor.swift */,
-				5295DDF92ADDCF5A0043B5AE /* ExampleGradients.swift */,
-				5295DDFB2ADDE2DF0043B5AE /* ExampleButtonsAndImages.swift */,
-				5295DDFD2ADDEB2D0043B5AE /* ExampleAlerts.swift */,
 			);
 			path = GuessTheFlag;
 			sourceTree = "<group>";
